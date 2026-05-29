@@ -1,0 +1,13 @@
+{
+  "name": "rh_wildquest_backend",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Brian Mutugi",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  }
+}
