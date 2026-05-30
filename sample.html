@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R&H WildQuest Tours and Travels | Kenya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #2d5a27; /* Forest Green */
+            --secondary-color: #d4af37; /* Safari Gold */
+            --dark-color: #1a1a1a;
+            --light-color: #f9f9f9;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background-color: var(--white);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            padding: 15px 50px;
+        }
+
+        header.scrolled .logo, 
+        header.scrolled .nav-links li a {
+            color: var(--primary-color);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links li a {
+            color: var(--white);
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links li a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Hero Slider Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-slide::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            color: var(--white);
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            animation: slideDown 1s ease forwards;
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: slideUp 1s ease forwards 0.5s;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .hero-content .btn {
+            animation: fadeIn 1s ease forwards 1s;
+            opacity: 0;
+        }
+
+        /* Generic Section Styles */
+        section {
+            padding: 100px 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Carousel/Slider System */
+        .carousel-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 30px;
+            transition: transform 0.5s ease;
+        }
+
+        .card {
+            flex: 0 0 calc(33.333% - 20px); /* Show 3 cards at a time by default */
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .card-img {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--white);
+            color: var(--primary-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border: 2px solid var(--primary-color);
+            z-index: 10;
+            transition: var(--transition);
+        }
+
+        .carousel-btn:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-prev { left: 0; }
+        .btn-next { right: 0; }
+
+        /* Specific Sections */
+        .destinations { background-color: var(--white); }
+        .safaris { background-color: var(--light-color); }
+        .wildlife { background-color: var(--white); }
+
+        /* Booking Form */
+        .booking {
+            background: linear-gradient(rgba(45, 90, 39, 0.9), rgba(45, 90, 39, 0.9)), url('https://images.unsplash.com/photo-1547471080-7fc2caa62e56?auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            color: var(--white);
+            padding: 100px 5%;
+        }
+
+        .booking-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            color: var(--dark-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+
+        textarea.form-control {
+            height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 60px 5% 20px;
+            text-align: center;
+        }
+
+        /* Scroll Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Keyframes */
+        @keyframes slideDown {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .card { flex: 0 0 calc(50% - 15px); }
+            .hero-content h1 { font-size: 3.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 20px; }
+            .nav-links { display: none; /* Add hamburger menu in real prod */ }
+            .card { flex: 0 0 100%; }
+            .hero-content h1 { font-size: 2.5rem; }
+            section { padding: 60px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header id="header">
+        <a href="#" class="logo">R&H <span>WildQuest</span></a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#destinations">Destinations</a></li>
+            <li><a href="#safaris">Safaris</a></li>
+            <li><a href="#wildlife">Wildlife</a></li>
+            <li><a href="#booking">Book Now</a></li>
+        </ul>
+    </header>
+
+    <!-- Hero Section with Slider -->
+    <section id="home" class="hero">
+        <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1920&q=80');">
+            <div class="hero-content">
+                <h1>Discover the Magic of Maasai Mara</h1>
+                <p>Experience the ultimate African safari with R&H WildQuest. Witness the great migration and untamed wilderness.</p>
+                <a href="#booking" class="btn">Start Your Journey</a>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?auto=format&fit=crop&w=1920&q=80');">
+            <div class="hero-content">
+                <h1>Conquer Mount Kenya</h1>
+                <p>Embark on breathtaking treks to the snowy peaks of Africa's second highest mountain.</p>
+                <a href="#destinations" class="btn">Explore Destinations</a>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=1920&q=80');">
+            <div class="hero-content">
+                <h1>Relax at Diani Beach</h1>
+                <p>From the savannah to the sea. Enjoy pristine white sands and crystal clear waters of the Kenyan coast.</p>
+                <a href="#safaris" class="btn">View Packages</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="destinations">
+        <div class="section-header animate-on-scroll">
+            <h2>Top Kenyan Destinations</h2>
+            <p>From golden savannahs to turquoise waters, explore the most iconic locations in Kenya.</p>
+        </div>
+        
+        <div class="carousel-container animate-on-scroll">
+            <div class="carousel-btn btn-prev" onclick="moveCarousel('dest-track', -1)">&#10094;</div>
+            <div class="carousel-track" id="dest-track">
+                <!-- Cards -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1600862083556-9d6e5a40bb71?auto=format&fit=crop&w=800&q=80" alt="Amboseli" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">Amboseli National Park</h3>
+                        <p class="card-desc">Famous for its large elephant herds and stunning views of Mount Kilimanjaro across the border.</p>
+                        <a href="#booking" class="btn" style="padding: 8px 20px; font-size: 0.85rem;">Explore</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=800&q=80" alt="Tsavo" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">Tsavo East & West</h3>
+                        <p class="card-desc">The largest national park in Kenya, home to the famous red elephants and man-eater lion legends.</p>
+                        <a href="#booking" class="btn" style="padding: 8px 20px; font-size: 0.85rem;">Explore</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1547471080-7fc2caa62e56?auto=format&fit=crop&w=800&q=80" alt="Samburu" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">Samburu Reserve</h3>
+                        <p class="card-desc">A unique, rugged landscape featuring rare wildlife species like the Grevy's zebra and reticulated giraffe.</p>
+                        <a href="#booking" class="btn" style="padding: 8px 20px; font-size: 0.85rem;">Explore</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1512104555823-7452d708304d?auto=format&fit=crop&w=800&q=80" alt="Lake Nakuru" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">Lake Nakuru</h3>
+                        <p class="card-desc">A beautiful rift valley lake known for its spectacular flocks of flamingos and rhino sanctuary.</p>
+                        <a href="#booking" class="btn" style="padding: 8px 20px; font-size: 0.85rem;">Explore</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-btn btn-next" onclick="moveCarousel('dest-track', 1)">&#10095;</div>
+        </div>
+    </section>
+
+    <!-- Safaris Section -->
+    <section id="safaris" class="safaris">
+        <div class="section-header animate-on-scroll">
+            <h2>Our Premium Safari Packages</h2>
+            <p>Curated experiences tailored to your adventurous spirit.</p>
+        </div>
+
+        <div class="carousel-container animate-on-scroll">
+            <div class="carousel-btn btn-prev" onclick="moveCarousel('safari-track', -1)">&#10094;</div>
+            <div class="carousel-track" id="safari-track">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80" alt="Migration" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">The Great Migration Safari</h3>
+                        <p class="card-desc">7 Days in the Maasai Mara witnessing one of the natural wonders of the world.</p>
+                        <a href="#booking" class="btn" style="padding: 8px 20px; font-size: 0.85rem;">Book Now</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1610992015732-2449b068d30e?auto=format&fit=crop&w=800&q=80" alt="Luxury" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">Luxury Lodge Retreat</h3>
+                        <p class="card-desc">Experience the wild in ultimate comfort with 5-star lodges, private game drives, and spa treatments.</p>
+                        <a href="#booking" class="btn" style="padding: 8px 20px; font-size: 0.85rem;">Book Now</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1521651201144-634f700b36ef?auto=format&fit=crop&w=800&q=80" alt="Photographic" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">Photographic Expedition</h3>
+                        <p class="card-desc">Guided by professional wildlife photographers. Specially adapted vehicles for the perfect shot.</p>
+                        <a href="#booking" class="btn" style="padding: 8px 20px; font-size: 0.85rem;">Book Now</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1533587851505-d119e13bf0eb?auto=format&fit=crop&w=800&q=80" alt="Family" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">Family Adventure</h3>
+                        <p class="card-desc">Kid-friendly safaris blending education, fun, and relaxation for the whole family.</p>
+                        <a href="#booking" class="btn" style="padding: 8px 20px; font-size: 0.85rem;">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-btn btn-next" onclick="moveCarousel('safari-track', 1)">&#10095;</div>
+        </div>
+    </section>
+
+    <!-- Wildlife Section -->
+    <section id="wildlife" class="wildlife">
+        <div class="section-header animate-on-scroll">
+            <h2>The Magnificent Wildlife</h2>
+            <p>Get up close with Africa's Big Five and an abundance of exotic birdlife and plains game.</p>
+        </div>
+
+        <div class="carousel-container animate-on-scroll">
+            <div class="carousel-btn btn-prev" onclick="moveCarousel('wildlife-track', -1)">&#10094;</div>
+            <div class="carousel-track" id="wildlife-track">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=800&q=80" alt="Lion" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">The African Lion</h3>
+                        <p class="card-desc">The undisputed king of the savannah. Observe prides hunting, resting, and raising cubs.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1555029465-b10372338c33?auto=format&fit=crop&w=800&q=80" alt="Elephant" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">African Elephant</h3>
+                        <p class="card-desc">Gentle giants moving in matriarchal herds. A truly humbling sight in the wild.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80" alt="Leopard" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">The Elusive Leopard</h3>
+                        <p class="card-desc">Masters of stealth. Spot these magnificent cats resting high up in acacia trees.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1520699697851-3dc68aa3a474?auto=format&fit=crop&w=800&q=80" alt="Rhino" class="card-img">
+                    <div class="card-content">
+                        <h3 class="card-title">The Black Rhino</h3>
+                        <p class="card-desc">An endangered marvel. R&H WildQuest promotes conservation efforts to protect them.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-btn btn-next" onclick="moveCarousel('wildlife-track', 1)">&#10095;</div>
+        </div>
+    </section>
+
+    <!-- Booking / Contact Section -->
+    <section id="booking" class="booking">
+        <div class="section-header animate-on-scroll">
+            <h2 style="color: white;">Plan Your Adventure</h2>
+            <p style="color: #eee;">Ready to experience Kenya? Drop us a line and let's craft your perfect itinerary.</p>
+        </div>
+
+        <div class="booking-container animate-on-scroll">
+            <form id="bookingForm">
+                <div class="form-group">
+                    <input type="text" id="name" class="form-control" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" class="form-control" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <select id="package" class="form-control" required>
+                        <option value="" disabled selected>Select a Package</option>
+                        <option value="migration">The Great Migration Safari</option>
+                        <option value="luxury">Luxury Lodge Retreat</option>
+                        <option value="photography">Photographic Expedition</option>
+                        <option value="custom">Custom Itinerary</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" class="form-control" placeholder="Tell us about your dream trip..."></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Submit Request</button>
+            </form>
+            <div id="formMessage" style="margin-top: 15px; text-align: center; font-weight: bold; display: none;"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <h2>R&H WildQuest Tours and Travels</h2>
+        <p style="margin: 15px 0; color: #aaa;">Nairobi, Kenya | The Heart of African Safaris</p>
+        <p>&copy; 2026 R&H WildQuest. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript logic -->
+    <script>
+        // 1. Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 2. Hero Slider Logic
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 5000); // Change slide every 5 seconds
+
+        // 3. Carousel/Slider Logic for Sections
+        const carouselStates = {
+            'dest-track': 0,
+            'safari-track': 0,
+            'wildlife-track': 0
+        };
+
+        function moveCarousel(trackId, direction) {
+            const track = document.getElementById(trackId);
+            const cards = track.querySelectorAll('.card');
+            const cardWidth = cards[0].offsetWidth + 30; // card width + gap
+            const visibleCards = window.innerWidth > 992 ? 3 : (window.innerWidth > 768 ? 2 : 1);
+            const maxIndex = cards.length - visibleCards;
+
+            carouselStates[trackId] += direction;
+
+            // Boundaries
+            if (carouselStates[trackId] < 0) carouselStates[trackId] = 0;
+            if (carouselStates[trackId] > maxIndex) carouselStates[trackId] = maxIndex;
+
+            track.style.transform = `translateX(-${carouselStates[trackId] * cardWidth}px)`;
+        }
+
+        // Adjust carousels on window resize
+        window.addEventListener('resize', () => {
+            ['dest-track', 'safari-track', 'wildlife-track'].forEach(trackId => {
+                carouselStates[trackId] = 0;
+                document.getElementById(trackId).style.transform = `translateX(0px)`;
+            });
+        });
+
+        // 4. Scroll Animations (Intersection Observer)
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(element => {
+            scrollObserver.observe(element);
+        });
+
+        // 5. Booking Form Submission (Fetch to Express Backend)
+        document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = e.target.querySelector('button');
+            const messageDiv = document.getElementById('formMessage');
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                package: document.getElementById('package').value,
+                message: document.getElementById('message').value
+            };
+
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            try {
+                // Pointing to our Express backend endpoint
+                const response = await fetch('/api/book', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    messageDiv.style.color = '#2d5a27';
+                    messageDiv.textContent = 'Success! Your adventure request has been received.';
+                    document.getElementById('bookingForm').reset();
+                } else {
+                    throw new Error(result.error || 'Something went wrong');
+                }
+            } catch (error) {
+                messageDiv.style.color = 'red';
+                messageDiv.textContent = 'Note: The frontend is running, but the Express server is needed to handle this POST request. Check the backend code!';
+                console.error('Submission error:', error);
+            } finally {
+                messageDiv.style.display = 'block';
+                submitBtn.textContent = 'Submit Request';
+                submitBtn.disabled = false;
+                
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>

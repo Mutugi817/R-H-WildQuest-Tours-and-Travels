@@ -197,10 +197,12 @@ header.scrolled .nav-bar .logo {
     align-items: center;
     justify-content: space-between;
     gap: 2.5rem;
+    margin: 0;
 }
 
 .nav-item a {
     color: inherit;
+    width: 100%;
     text-transform: uppercase;
     font-weight: 600;
     font-size: 0.8rem;
@@ -236,6 +238,41 @@ header.scrolled .nav-bar .logo {
 
 .nav-item a:hover {
     color: var(--accent-color);
+}
+
+/* Mobile menu icon */
+.menu-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff62;
+    border-radius: 5px;
+    border: 2px solid #ffffff7e;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding: 5px;
+    display: none;
+    cursor: pointer;   
+    z-index: 100; 
+}
+
+.menu-icon span {
+    width: 80%;
+    height: 2px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+}
+
+.menu-icon.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-icon.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-icon.active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
 }
 
 .logo {
@@ -310,7 +347,7 @@ header.scrolled .nav-bar .logo {
 }
 
 .hero-content h1 {
-    font-size: 4.5rem;
+    font-size: clamp(1.5rem, 4vw + 1rem, 3.5rem);
     margin-bottom: 20px;
     transform: translateY(-50px);
     animation: slideDown 1s ease forwards;
@@ -888,22 +925,26 @@ header.scrolled .nav-bar .logo {
 /* ==========================================================================
    11. CENTRALIZED RESPONSIVE MEDIA QUERIES
    ========================================================================== */
+@media (max-width: 617px) {
+    .destinations-container {
+        grid-template-columns: 1fr;
+    }
+}
 
-/* STAGE 1: Small Tablets & Large Smartphones (min-width: 576px) */
-@media (min-width: 576px) {
-    .container {
-        padding: 0 var(--spacing-md);
+@media (max-width: 450px) {
+    html {
+        font-size: 50%;
     }
-    .form-row {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 365px) {
+    .global-footer .footer-column {
+        flex-direction: column;
     }
-    .cta-action-row {
-        flex-direction: row;
-        align-items: center;
-    }
-    .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
+    
+    .global-footer p{
+        text-align: center;
+        margin-top: 2rem;
     }
 }
 
@@ -995,6 +1036,76 @@ header.scrolled .nav-bar .logo {
     
     .floating-badge {
         animation: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    h1{
+        text-align: center;
+    }
+
+    header, section {
+        padding: 0 2rem;
+    }
+
+    .hero-content {
+        width: 90%;
+    }
+
+    .hero-content {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%)
+    }
+
+    .hero-content p {
+        text-align: center;
+    }
+
+    .nav-bar .nav-list {
+        flex-direction: column;
+        position: inherit;
+        background-color: rgba(128, 0, 0, 0.87);
+        width: 50%;
+        height: 80vh;
+        right: -50%;
+        top: 0;
+        border-radius: var(--radius-md);
+        text-align: center;
+    }
+
+    .nav-list.active {
+        right: 0;
+    }
+
+    .nav-bar .nav-list li,
+    .nav-bar .nav-list li a{
+        width: 100%;
+        height: 100%;
+        padding: 1rem;
+    }
+    .nav-bar .nav-list li:hover {
+        background-color: var(--accent-color);
+    }
+
+    .nav-bar .nav-list .btn {
+        display: none;
+    }
+
+    .menu-icon {
+        display: flex;
+    }
+
+    .destinations-container {
+        grid-template-columns: repeat(2, 1fr) ;
+    }
+
+    .destination-box h3 {
+        font-size: 1.4rem;
+    }
+
+    .destination-box p {
+        font-size: 1rem;
     }
 }
 

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -24,14 +24,22 @@
 
     <!-- Header System -->
     <header id="header">
-        <nav class="nav-bar">
-            <a class="logo" href="#">R&H <span class="n1">WildQuest </span><span class="n2">Tours & Travels</span></a>
-            <ul class="nav-list">
-                <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Tours</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Destinations</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">About Us</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+        <nav class="nav-bar active">
+            <a class="logo" href="index.html">R&H <span class="n1">WildQuest </span><span class="n2">Tours & Travels</span></a>
+
+            <!-- Mobile menu button -->
+            <button class="menu-icon active" id="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button> 
+
+            <ul class="nav-list" id="nav-list">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="pages/tours.html" class="nav-link">Tours</a></li>
+                <li class="nav-item"><a href="pages/destinations.html" class="nav-link">Destinations</a></li>
+                <li class="nav-item"><a href="pages/about.html" class="nav-link">About Us</a></li>
+                <li class="nav-item"><a href="pages/contact.html" class="nav-link">Contact</a></li>
                 <li><button class="btn">Book A Tour</button></li>
             </ul>
         </nav>
@@ -48,14 +56,14 @@
             </div>
             <div class="hero-slide" style="background-image: url(images/photo-1518709594023-6eab9bab7b23.avif);">
                 <div class="hero-content">
-                    <h1>Discover the Magic of Maasai Mara</h1>
-                    <p>Experience the ultimate African safari with R&H WildQuest. Witness the great migration and untamed wilderness.</p>
+                    <h1>Relax at Diani Beach</h1>
+                    <p>From the savannah to the sea. Enjoy pristine white sands and crystal clear waters of the Kenyan coast.</p>
                 </div>
             </div>
             <div class="hero-slide"  style="background-image: url(images/photo-1623951581058-58138db08519.avif);">
                 <div class="hero-content">
-                    <h1>Discover the Magic of Maasai Mara</h1>
-                    <p>Experience the ultimate African safari with R&H WildQuest. Witness the great migration and untamed wilderness.</p>
+                    <h1>Conquer Mount Kenya</h1>
+                    <p>Embark on breathtaking treks to the snowy peaks of Africa's second highest mountain.</p>
                 </div>
             </div>
             <div class="hero-slide" style="background-image: url(images/photo-1518709766631-a6a7f45921c3.avif);">
@@ -198,6 +206,10 @@
             <div class="section-content">
                 <p>At R&H WildQuest Tours & Travels, we believe an African safari is more than just a vacation; it's a life-changing journey. Our expert local guides, tailored itineraries, and commitment to sustainable tourism ensure you get an authentic, unforgettable experience.</p>
                 <article class="features-container">
+                    <div class="feature-box">
+                        <h3>Expert Local Guides</h3>
+                        <p>Our guides are born and raised in East Africa, offering unmatched knowledge of wildlife behavior and hidden gems.</p>
+                    </div>
                     <div class="feature-box">
                         <h3>Expert Local Guides</h3>
                         <p>Our guides are born and raised in East Africa, offering unmatched knowledge of wildlife behavior and hidden gems.</p>
@@ -370,6 +382,6 @@
         </footer>
     </main>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
