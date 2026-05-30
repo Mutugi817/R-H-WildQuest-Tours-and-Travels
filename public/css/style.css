@@ -931,11 +931,6 @@ header.scrolled .nav-bar .logo {
     }
 }
 
-@media (max-width: 450px) {
-    html {
-        font-size: 50%;
-    }
-}
 
 @media (max-width: 365px) {
     .global-footer .footer-column {
